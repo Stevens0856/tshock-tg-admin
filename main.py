@@ -2,11 +2,13 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher, F
-from handlers import default_commands
+from handlers import default_commands, authorization
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from config.configreader import config
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
+
+from keyboards.default_menu import set_default_menu
 from middlewares.db import DbSessionMiddleware
 from models.methods import create_tables
 
@@ -40,10 +42,12 @@ dp.callback_query.middleware(DbSessionMiddleware(db_pool))
 
 # Register routers
 dp.include_router(default_commands.router)
+dp.include_router(authorization.router)
 
 
 async def main():
     await create_tables(engine)
+    await set_default_menu(bot)  # TODO: rewrite to multilang
     await dp.start_polling(bot)
 
 
