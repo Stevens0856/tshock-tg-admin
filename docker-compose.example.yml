@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+    bot:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        stop_signal: SIGINT
+        environment:
+            - BOT_TOKEN
+            - DB_HOST=database
+            - POSTGRES_DSN
+        depends_on:
+            - database
+            - redis
+    database:
+        image: postgres:13-alpine
+        restart: always
+        environment:
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASS}
+            POSTGRES_DB: ${DB_NAME}
+        ports:
+            # if you want to connect to db from out
+            - "5432:5432"
+        volumes:
+            - "/path/to/postgres-data:/var/lib/postgresql/data"
+    redis:
+        image: redis:latest
+        restart: always
+        volumes:
+            - "/path/to/redis-data:/data"
