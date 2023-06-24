@@ -1,33 +1,24 @@
 from aiogram import Router
-from aiogram.filters import StateFilter, Text, Command, CommandStart
+from aiogram.filters import StateFilter, Text, Command, CommandStart, or_f
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state
 from aiogram.types import Message, CallbackQuery
 
 from filters.auth import IsAuth
 from states.states import FSMAuthorization
-from lexicon.lexicon import WELCOME, LANG_SELECTED_IN_AUTH
+from lexicon.lexicon import WELCOME, LANG_SELECTED_IN_AUTH, WARNING_CHOOSE_LANG
 from keyboards.keyboards import choose_language_kb, create_token_kb
 
 router = Router()
+# TODO: Повесить на весь роутер ~IsAuth() фильтр
 
 
-# Fires on all messages if the user is not authorized. Moves to authorization state.
-@router.message(~IsAuth(), StateFilter(default_state))
+# Only fires if the user is not logged in. If it is not an authorization process or a /start command
+@router.message(~IsAuth(), or_f(~StateFilter(FSMAuthorization), CommandStart()))
 async def process_authorization_start(message: Message, state: FSMContext):
     await message.answer(text=WELCOME,
                          reply_markup=choose_language_kb())
     await state.set_state(FSMAuthorization.select_language)
-
-
-@router.message(~IsAuth(), CommandStart())  # TODO: Попробовать объединить с фильтром выше, логика та же, фильтры разные
-async def process_authorization_start(message: Message, state: FSMContext):
-    await message.answer(text=WELCOME,
-                         reply_markup=choose_language_kb())
-    await state.set_state(FSMAuthorization.select_language)
-
-
-# TODO: Написать хэндлер обрабатывающий некорректное сообщение в состоянии select_language
 
 
 @router.callback_query(StateFilter(FSMAuthorization.select_language),
@@ -40,9 +31,15 @@ async def process_choose_language(callback: CallbackQuery, state: FSMContext):
     await state.set_state(FSMAuthorization.input_api_token)
 
 
+@router.message(StateFilter(FSMAuthorization.select_language))
+async def warning_choose_language(message: Message):
+    await message.answer(text=WARNING_CHOOSE_LANG,
+                         reply_markup=choose_language_kb())
+
+
 @router.callback_query(StateFilter(FSMAuthorization.input_api_token),
                        Text(text=['back']))
-async def process_choose_language(callback: CallbackQuery, state: FSMContext):
+async def process_back_to_choose_language(callback: CallbackQuery, state: FSMContext):
     await callback.message.delete()
     await callback.message.answer(text=WELCOME,
                                   reply_markup=choose_language_kb())

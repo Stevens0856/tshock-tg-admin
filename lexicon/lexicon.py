@@ -22,6 +22,8 @@ LANG_SELECTED_IN_AUTH = {
           'Please submit a token or create a new one.'
 }
 
+WARNING_CHOOSE_LANG = 'Чтобы продолжить, необходимо выбрать язык. / To continue, you must select a language.'
+
 CREATE_SESSION_TOKEN_MENU = {
     'ru': {
         'create_token': 'Создать токен',
@@ -32,4 +34,3 @@ CREATE_SESSION_TOKEN_MENU = {
         'back': '<< Back'
     }
 }
-
