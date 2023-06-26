@@ -24,8 +24,8 @@ async def get_token(session: AsyncSession, telegram_id: int) -> str | None:
     result = await session.execute(
         select(User.api_token).where(User.user_id == telegram_id)
     )
-    user_data = result.scalars().one_or_none()
-    return user_data.api_token if user_data else None
+    api_token = result.scalars().one_or_none()
+    return api_token
 
 
 async def merge_user(session: AsyncSession, telegram_id: int, name_in_game: str, api_token: str, lang: str):
@@ -35,3 +35,11 @@ async def merge_user(session: AsyncSession, telegram_id: int, name_in_game: str,
     # There's not much we can do, so simply ignore it until we come up with a better solution
     with suppress(IntegrityError):
         await session.commit()
+
+
+async def get_language(session: AsyncSession, telegram_id: int) -> str | None:
+    result = await session.execute(
+        select(User.lang).where(User.user_id == telegram_id)
+    )
+    language = result.scalars().one_or_none()
+    return language

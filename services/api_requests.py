@@ -38,3 +38,27 @@ async def tokentest(token) -> dict:
     """
 
     return await request("tokentest", token)
+
+
+async def v2_token_create(username: str, password: str) -> dict:
+    """
+    /v2/token/create
+
+    Description:
+
+    Creates an authenticated token for use with other endpoints
+
+    Returns:
+
+    HTTP 200 if the authentication succeeds
+
+    HTTP 403 if the authentication fails
+
+    response - Error message if the authentication failed, else an authenticated token.
+
+    :param username: User with which to authenticate the token
+    :param password: User's password
+    :return: a result dict
+    """
+
+    return await request("v2/token/create", '', username=username, password=password)

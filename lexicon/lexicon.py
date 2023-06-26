@@ -1,8 +1,8 @@
 DEFAULT_MENU_COMMANDS = {
-    'ru': {
-        '/menu': 'Главное меню',
-        '/setlanguage': 'Смена языка',
-        '/help': 'Помощь',
+    'en': {
+        '/menu': 'Main menu',
+        '/setlanguage': 'Switch language',
+        '/help': 'Bot Help',
     }
 }
 
@@ -53,4 +53,55 @@ CREATE_SESSION_TOKEN_MENU = {
         'create_token': 'Create token',
         'back': '<< Back'
     }
+}
+
+CANCEL_MENU = {
+    'ru': {
+        'cancel': '❌ Отмена'
+    },
+    'en': {
+        'cancel': '❌ Cancel'
+    }
+}
+
+INPUT_LOGIN_TEXT = {
+    'ru': 'Введите имя вашего персонажа на сервере.',
+    'en': 'Enter the name of your character on the server.'
+}
+
+INPUT_PASSWORD_TEXT = {
+    'ru': 'Введите пароль, который используется для входа в игру этим персонажем.',
+    'en': 'Enter the password that is used to enter the game by this character.'
+}
+
+TOKEN_CREATE_403 = {
+    'ru': '❗️Возможно, имя пользователя или пароль неверны, или эта учетная запись не имеет достаточных привилегий.',
+    'en': '❗️Username or password may be incorrect or this account may not have sufficient privileges.'
+}
+
+TOKEN_CREATE_200 = {
+    'ru': '✅ Токен создан!\n'
+          'Авторизация прошла успешно!\n'
+          'Созданный токен можно будет получить в разделе "Токены".',
+    'en': '✅ Token created!\n'
+          'Authorization was successful!\n'
+          'The created token can be obtained in the "Tokens" section.'
+}
+
+MAIN_MENU = {
+    'ru': {
+        'server': '⚙️ Сервер',
+        'users': '👨‍🦰 Пользователи',
+        'tokens': '🗝 Токены',
+    },
+    'en': {
+        'server': '⚙️ Server',
+        'users': '👨‍🦰 Users',
+        'tokens': '🗝 Tokens',
+    }
+}
+
+MAIN_MENU_TEXT = {
+    'ru': '📜 Главное меню',
+    'en': '📜 Main menu'
 }
