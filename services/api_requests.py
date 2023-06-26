@@ -9,7 +9,7 @@ from config.configreader import config
 log = logging.getLogger('api_requests')
 
 
-async def request(endpoint: str, token: str, **kwargs) -> dict:
+async def request(endpoint: str, token: str = '', **kwargs) -> dict:
     url = f"http://{config.tshock_server_host}:{config.tshock_server_port}/{endpoint}"
     params = {"token": token, **kwargs}
     async with aiohttp.ClientSession() as session:
@@ -61,4 +61,4 @@ async def v2_token_create(username: str, password: str) -> dict:
     :return: a result dict
     """
 
-    return await request("v2/token/create", '', username=username, password=password)
+    return await request("v2/token/create", username=username, password=password)
