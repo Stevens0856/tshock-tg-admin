@@ -10,6 +10,8 @@ services:
             - BOT_TOKEN
             - DB_HOST=database
             - POSTGRES_DSN
+            - TSHOCK_SERVER_HOST
+            - TSHOCK_SERVER_PORT
         depends_on:
             - database
             - redis

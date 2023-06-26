@@ -36,8 +36,7 @@ dp.message.filter(F.chat.type == "private")
 # Register middlewares
 # This middleware fires before filters
 dp.message.outer_middleware(DbSessionMiddleware(db_pool))
-# This is after filters
-dp.callback_query.middleware(DbSessionMiddleware(db_pool))
+dp.callback_query.outer_middleware(DbSessionMiddleware(db_pool))
 
 
 # Register routers

@@ -4,6 +4,8 @@ from pydantic import BaseSettings, PostgresDsn
 class Config(BaseSettings):
     bot_token: str
     postgres_dsn: PostgresDsn
+    tshock_server_host: str
+    tshock_server_port: str
 
     class Config:
         env_file = '.env'
