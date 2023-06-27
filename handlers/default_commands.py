@@ -6,7 +6,7 @@ from filters.auth import IsAuth
 from keyboards.keyboards import main_menu_kb
 from lexicon.lexicon import MAIN_MENU_TEXT
 
-router = Router()
+router: Router = Router()
 
 
 @router.message(CommandStart(), IsAuth())

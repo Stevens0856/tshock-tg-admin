@@ -17,10 +17,9 @@ from keyboards.keyboards import choose_language_kb, create_token_kb, cancel_kb, 
 
 from services.api_requests import tokentest, v2_token_create
 
-router = Router()
-# TODO: Повесить на весь роутер ~IsAuth() фильтр
+router: Router = Router()
 
-log = logging.getLogger('authorization')
+log: logging.Logger = logging.getLogger('authorization')
 
 
 # Only fires if the user is not logged in. If it is not an authorization process or a /start command

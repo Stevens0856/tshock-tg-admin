@@ -14,12 +14,12 @@ class UserLanguageMiddleware(BaseMiddleware):
             data: Dict[str, Any],
     ) -> Any:
         try:
-            user_id = data['event_from_user'].id
+            user_id: int = data['event_from_user'].id
         except KeyError:
-            data["language"] = 'en'
+            data["language"]: str = 'en'
             return await handler(event, data)
 
-        language = await get_language(data["session"], user_id)
-        data["language"] = language if language else 'en'
+        language: str | None = await get_language(data["session"], user_id)
+        data["language"]: str = language if language else 'en'
 
         return await handler(event, data)

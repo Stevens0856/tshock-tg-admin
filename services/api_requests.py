@@ -10,12 +10,12 @@ log = logging.getLogger('api_requests')
 
 
 async def request(endpoint: str, token: str = '', **kwargs) -> dict:
-    url = f"http://{config.tshock_server_host}:{config.tshock_server_port}/{endpoint}"
-    params = {"token": token, **kwargs}
+    url: str = f"http://{config.tshock_server_host}:{config.tshock_server_port}/{endpoint}"
+    params: dict = {"token": token, **kwargs}
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(url, params=params, timeout=5) as response:
-                data = await response.json()
+                data: dict = await response.json()
                 return data
         except ClientConnectorError as e:
             log.error(f"request | Exception: {e}")
