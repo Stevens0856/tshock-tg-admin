@@ -5,7 +5,7 @@ from aiogram.types import Message
 
 from filters.auth import IsAuth
 from keyboards.keyboards import main_menu_kb
-from lexicon.lexicon import MAIN_MENU_TEXT
+from lexicon.default.message_texts import MAIN_MENU_TEXT
 from states.states import FSMAuthorization
 
 router: Router = Router()

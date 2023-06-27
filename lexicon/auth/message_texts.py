@@ -1,17 +1,5 @@
-DEFAULT_MENU_COMMANDS: dict[str, dict[str, str]] = {
-    'en': {
-        '/menu': 'Main menu',
-        '/setlanguage': 'Switch language',
-        '/help': 'Bot Help',
-    }
-}
-
-WELCOME: str = 'Добро пожаловать! / Welcome!\n''Выберите язык. / Choose language.'
-
-LANGUAGE_MENU: dict[str, str] = {
-    'ru': '🇷🇺 Русский',
-    'en': '🏴󠁧󠁢󠁥󠁮󠁧󠁿 English',
-}
+WELCOME: str = 'Добро пожаловать! / Welcome!\n' \
+               'Выберите язык. / Choose language.'
 
 LANG_SELECTED_IN_AUTH: dict[str, str] = {
     'ru': '🇷🇺 Выбран русский язык.\n'
@@ -44,26 +32,6 @@ ERROR: dict[str, str] = {
           'Try later.'
 }
 
-CREATE_SESSION_TOKEN_MENU: dict[str, dict[str, str]] = {
-    'ru': {
-        'create_token': 'Создать токен',
-        'back': '<< Назад'
-    },
-    'en': {
-        'create_token': 'Create token',
-        'back': '<< Back'
-    }
-}
-
-CANCEL_MENU: dict[str, dict[str, str]] = {
-    'ru': {
-        'cancel': '❌ Отмена'
-    },
-    'en': {
-        'cancel': '❌ Cancel'
-    }
-}
-
 INPUT_LOGIN_TEXT: dict[str, str] = {
     'ru': 'Введите имя вашего персонажа на сервере.',
     'en': 'Enter the name of your character on the server.'
@@ -86,22 +54,4 @@ TOKEN_CREATE_200: dict[str, str] = {
     'en': '✅ Token created!\n'
           'Authorization was successful!\n'
           'The created token can be obtained in the "Tokens" section.'
-}
-
-MAIN_MENU: dict[str, dict[str, str]] = {
-    'ru': {
-        'server': '⚙️ Сервер',
-        'users': '👨‍🦰 Пользователи',
-        'tokens': '🗝 Токены',
-    },
-    'en': {
-        'server': '⚙️ Server',
-        'users': '👨‍🦰 Users',
-        'tokens': '🗝 Tokens',
-    }
-}
-
-MAIN_MENU_TEXT: dict[str, str] = {
-    'ru': '📜 Главное меню',
-    'en': '📜 Main menu'
 }

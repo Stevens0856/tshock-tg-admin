@@ -1,5 +1,6 @@
 from keyboards.keyboard_utils import create_inline_kb
-from lexicon.lexicon import LANGUAGE_MENU, CREATE_SESSION_TOKEN_MENU, CANCEL_MENU, MAIN_MENU
+from lexicon.default.menus import LANGUAGE_MENU, CANCEL_MENU, MAIN_MENU
+from lexicon.auth.menus import CREATE_SESSION_TOKEN_MENU
 
 
 def choose_language_kb():

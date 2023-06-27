@@ -10,9 +10,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from filters.auth import IsAuth
 from models.methods import merge_user
 from states.states import FSMAuthorization
-from lexicon.lexicon import WELCOME, LANG_SELECTED_IN_AUTH, WARNING_CHOOSE_LANG, TOKEN_INPUT_200, TOKEN_INPUT_403, \
-    ERROR, WAITING_TOKEN_INPUT, INPUT_LOGIN_TEXT, INPUT_PASSWORD_TEXT, TOKEN_CREATE_403, TOKEN_CREATE_200, \
-    MAIN_MENU_TEXT
+from lexicon.auth.message_texts import WELCOME, LANG_SELECTED_IN_AUTH, WARNING_CHOOSE_LANG, TOKEN_INPUT_200,\
+    TOKEN_INPUT_403, ERROR, WAITING_TOKEN_INPUT, INPUT_LOGIN_TEXT, INPUT_PASSWORD_TEXT, TOKEN_CREATE_403,\
+    TOKEN_CREATE_200
+from lexicon.default.message_texts import MAIN_MENU_TEXT
 from keyboards.keyboards import choose_language_kb, create_token_kb, cancel_kb, main_menu_kb
 
 from services.api_requests import tokentest, v2_token_create
