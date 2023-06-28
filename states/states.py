@@ -16,3 +16,9 @@ class FSMServerSection(StatesGroup):
     menu = State()
     broadcast = State()
     raw_cmd = State()
+
+
+class FSMUsersSection(StatesGroup):
+    menu = State()
+    active_users = State()
+    all_users = State()

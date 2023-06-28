@@ -2,6 +2,7 @@ from keyboards.keyboard_utils import create_inline_kb
 from lexicon.default.menus import LANGUAGE_MENU, CANCEL_MENU, MAIN_MENU
 from lexicon.auth.menus import CREATE_SESSION_TOKEN_MENU
 from lexicon.server_section.menus import SERVER_SECTION_MENU
+from lexicon.users_section.menus import USERS_SECTION_MENU
 
 
 def choose_language_kb():
@@ -22,3 +23,7 @@ def main_menu_kb(lang):
 
 def server_section_menu_kb(lang):
     return create_inline_kb(1, SERVER_SECTION_MENU[lang])
+
+
+def users_section_menu_kb(lang):
+    return create_inline_kb(1, USERS_SECTION_MENU[lang])
