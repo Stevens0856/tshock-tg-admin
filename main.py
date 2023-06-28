@@ -2,7 +2,7 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher, F
-from handlers import default_commands, authorization
+from handlers import default_commands, authorization, main_menu, server_section
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from config.configreader import config
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
@@ -27,7 +27,7 @@ engine = create_async_engine(config.postgres_dsn, future=True, echo=True)
 
 db_pool = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
-bot: Bot = Bot(BOT_TOKEN)
+bot: Bot = Bot(BOT_TOKEN, parse_mode='HTML')
 dp: Dispatcher = Dispatcher(storage=storage)
 
 # Allow interaction in private chats (not groups or channels) only
@@ -45,6 +45,8 @@ dp.callback_query.middleware(UserLanguageMiddleware())
 # Register routers
 dp.include_router(default_commands.router)
 dp.include_router(authorization.router)
+dp.include_router(main_menu.router)
+dp.include_router(server_section.router)
 
 
 async def main():

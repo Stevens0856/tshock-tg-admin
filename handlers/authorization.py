@@ -155,9 +155,3 @@ async def process_password_input(message: Message, state: FSMContext, session: A
                              reply_markup=create_token_kb(state_data['language']))
 
         await state.set_state(FSMAuthorization.input_api_token)
-
-
-@router.message(Command(commands='cancel'), ~StateFilter(default_state))
-async def process_cancel_command_state(message: Message, state: FSMContext):
-    await message.answer(text='Выход из всех стадий')
-    await state.clear()

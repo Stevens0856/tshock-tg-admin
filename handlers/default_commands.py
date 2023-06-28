@@ -6,13 +6,14 @@ from aiogram.types import Message
 from filters.auth import IsAuth
 from keyboards.keyboards import main_menu_kb
 from lexicon.default.message_texts import MAIN_MENU_TEXT
-from states.states import FSMAuthorization
+from states.states import FSMAuthorization, FSMServerSection
 
 router: Router = Router()
 # Despite other filters, we explicitly prevent standard commands from running during input events
 router.message.filter(~StateFilter(FSMAuthorization.input_api_token,
                                    FSMAuthorization.input_login,
-                                   FSMAuthorization.input_password))
+                                   FSMAuthorization.input_password,
+                                   FSMServerSection.broadcast))
 
 
 @router.message(or_f(CommandStart(), Command(commands='menu')), IsAuth())
