@@ -25,13 +25,6 @@ TOKEN_INPUT_200: dict[str, str] = {
     'en': '✅ Authorization was successful!'
 }
 
-ERROR: dict[str, str] = {
-    'ru': '❗️Ошибка.\n'
-          'Попробуйте позже.',
-    'en': '❗️Error.\n'
-          'Try later.'
-}
-
 INPUT_LOGIN_TEXT: dict[str, str] = {
     'ru': 'Введите имя вашего персонажа на сервере.',
     'en': 'Enter the name of your character on the server.'

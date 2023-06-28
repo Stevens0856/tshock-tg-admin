@@ -32,3 +32,14 @@ MAIN_MENU: dict[str, dict[str, str]] = {
         'tokens': '🗝 Tokens',
     }
 }
+
+CONFIRMATION_MENU: dict[str, dict[str, str]] = {
+    'ru': {
+        'confirm': '✅ Подтвердить',
+        'cancel': '❌ Отмена'
+    },
+    'en': {
+        'confirm': '✅ Confirm',
+        'cancel': '❌ Cancel'
+    }
+}

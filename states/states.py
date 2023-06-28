@@ -22,3 +22,8 @@ class FSMUsersSection(StatesGroup):
     menu = State()
     active_users = State()
     all_users = State()
+
+
+class FSMTokensSection(StatesGroup):
+    menu = State()
+    logout = State()

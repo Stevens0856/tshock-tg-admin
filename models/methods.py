@@ -1,6 +1,6 @@
 from contextlib import suppress
 
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -18,6 +18,13 @@ async def get_userdata(session: AsyncSession, telegram_id: int) -> User | None:
         select(User).where(User.user_id == telegram_id)
     )
     return result.scalars().one_or_none()
+
+
+async def delete_user(session: AsyncSession, telegram_id: int) -> None:
+    await session.execute(
+        delete(User).where(User.user_id == telegram_id)
+    )
+    await session.commit()
 
 
 async def get_token(session: AsyncSession, telegram_id: int) -> str | None:

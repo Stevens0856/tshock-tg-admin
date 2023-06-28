@@ -2,7 +2,7 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher, F
-from handlers import default_commands, authorization, main_menu, server_section, users_section
+from handlers import default_commands, authorization, main_menu, server_section, users_section, tokens_section
 from aiogram.fsm.storage.redis import RedisStorage, Redis
 from config.configreader import config
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
@@ -48,6 +48,7 @@ dp.include_router(authorization.router)
 dp.include_router(main_menu.router)
 dp.include_router(server_section.router)
 dp.include_router(users_section.router)
+dp.include_router(tokens_section.router)
 
 
 async def main():
