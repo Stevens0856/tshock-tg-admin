@@ -1,6 +1,7 @@
 from keyboards.keyboard_utils import create_inline_kb
-from lexicon.default.menus import LANGUAGE_MENU, CANCEL_MENU, MAIN_MENU, CONFIRMATION_MENU
+from lexicon.default.menus import CANCEL_MENU, MAIN_MENU, CONFIRMATION_MENU
 from lexicon.auth.menus import CREATE_SESSION_TOKEN_MENU
+from lexicon.language.menus import LANGUAGE_MENU
 from lexicon.server_section.menus import SERVER_SECTION_MENU
 from lexicon.tokens_section.menus import TOKENS_SECTION_MENU
 from lexicon.users_section.menus import USERS_SECTION_MENU

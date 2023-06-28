@@ -4,9 +4,10 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
 from filters.auth import IsAuth
-from keyboards.keyboards import main_menu_kb
+from keyboards.keyboards import main_menu_kb, choose_language_kb
 from lexicon.default.message_texts import MAIN_MENU_TEXT
-from states.states import FSMAuthorization, FSMServerSection
+from lexicon.language.message_texts import WAITING_LANGUAGE_RESELECTION_TEXT
+from states.states import FSMAuthorization, FSMServerSection, FSMLanguageReselection
 
 router: Router = Router()
 # Despite other filters, we explicitly prevent standard commands from running during input events
@@ -23,8 +24,10 @@ async def process_start_command(message: Message, state: FSMContext, language: s
 
 
 @router.message(Command(commands='setlanguage'), IsAuth())
-async def process_start_command(message: Message):
-    await message.answer(text='This is where the language change will start.')
+async def process_start_command(message: Message, state: FSMContext, language: str):
+    await message.answer(text=WAITING_LANGUAGE_RESELECTION_TEXT[language],
+                         reply_markup=choose_language_kb())
+    await state.set_state(FSMLanguageReselection.select_language)
 
 
 @router.message(Command(commands='help'))

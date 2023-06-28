@@ -50,3 +50,13 @@ async def get_language(session: AsyncSession, telegram_id: int) -> str | None:
     )
     language = result.scalars().one_or_none()
     return language
+
+
+async def update_lang(session: AsyncSession, telegram_id: int, lang: str) -> None:
+    user: User | None = await get_userdata(session, telegram_id)
+    if user:
+        user.lang = lang
+        await session.commit()
+    else:
+        # Handle the case when the user doesn't exist
+        raise ValueError(f"User with telegram_id {telegram_id} does not exist.")

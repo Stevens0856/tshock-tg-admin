@@ -6,11 +6,6 @@ DEFAULT_MENU_COMMANDS: dict[str, dict[str, str]] = {
     }
 }
 
-LANGUAGE_MENU: dict[str, str] = {
-    'ru': '🇷🇺 Русский',
-    'en': '🏴󠁧󠁢󠁥󠁮󠁧󠁿 English',
-}
-
 CANCEL_MENU: dict[str, dict[str, str]] = {
     'ru': {
         'cancel': '❌ Отмена'
