@@ -1,9 +1,8 @@
 import logging
 
 from aiogram import Router
-from aiogram.filters import StateFilter, Text, Command, CommandStart, or_f
+from aiogram.filters import StateFilter, Text, CommandStart, or_f
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import default_state
 from aiogram.types import Message, CallbackQuery
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -54,7 +53,7 @@ async def warning_choose_language(message: Message):
 
 # Handling the back button click
 @router.callback_query(StateFilter(FSMAuthorization.input_api_token),
-                       Text(text=['back']))
+                       Text(text='back'))
 async def process_back_to_choose_language(callback: CallbackQuery, state: FSMContext):
     await callback.message.delete()
     await callback.message.answer(text=WELCOME,
@@ -88,7 +87,7 @@ async def process_token_input(message: Message, state: FSMContext, session: Asyn
 
 # Start creating a token
 @router.callback_query(StateFilter(FSMAuthorization.input_api_token),
-                       Text(text=['create_token']))
+                       Text(text='create_token'))
 async def process_create_token_start(callback: CallbackQuery, state: FSMContext):
     state_data: dict = await state.get_data()
 
@@ -100,7 +99,7 @@ async def process_create_token_start(callback: CallbackQuery, state: FSMContext)
 
 # Handle pressing the cancel button when entering a login or password. Return to token input
 @router.callback_query(or_f(StateFilter(FSMAuthorization.input_login), StateFilter(FSMAuthorization.input_password)),
-                       Text(text=['cancel']))
+                       Text(text='cancel'))
 async def process_create_token_start(callback: CallbackQuery, state: FSMContext):
     state_data: dict = await state.get_data()
 
