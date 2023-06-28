@@ -1,7 +1,7 @@
 import logging
 
 from aiogram import Router
-from aiogram.filters import StateFilter, Text
+from aiogram.filters import StateFilter, Text, or_f
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
@@ -54,15 +54,6 @@ async def process_broadcast_input(message: Message, state: FSMContext, language:
     await state.set_state(FSMServerSection.menu)
 
 
-@router.callback_query(StateFilter(FSMServerSection.broadcast), Text(text='cancel'))
-async def process_cancel_broadcast(callback: CallbackQuery, state: FSMContext, language: str):
-    await callback.message.delete()
-    await callback.message.answer(text=SERVER_SECTION_MENU_TEXT[language],
-                                  reply_markup=server_section_menu_kb(language))
-
-    await state.set_state(FSMServerSection.menu)
-
-
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='raw_cmd'))
 async def process_raw_cmd_start(callback: CallbackQuery, state: FSMContext, language: str):
     await callback.message.delete()
@@ -79,8 +70,10 @@ async def process_raw_cmd_input(message: Message, state: FSMContext, language: s
     await state.set_state(FSMServerSection.menu)
 
 
-@router.callback_query(StateFilter(FSMServerSection.raw_cmd), Text(text='cancel'))
-async def process_cancel_raw_cmd(callback: CallbackQuery, state: FSMContext, language: str):
+@router.callback_query(or_f(StateFilter(FSMServerSection.broadcast),
+                            StateFilter(FSMServerSection.raw_cmd)),
+                       Text(text='cancel'))
+async def process_cancel_input(callback: CallbackQuery, state: FSMContext, language: str):
     await callback.message.delete()
     await callback.message.answer(text=SERVER_SECTION_MENU_TEXT[language],
                                   reply_markup=server_section_menu_kb(language))
