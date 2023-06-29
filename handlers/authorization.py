@@ -23,7 +23,7 @@ log: logging.Logger = logging.getLogger('authorization')
 
 
 # Only fires if the user is not logged in. If it is not an authorization process or a /start command
-@router.message(~IsAuth(), or_f(~StateFilter(FSMAuthorization), CommandStart()))
+@router.message(or_f(~StateFilter(FSMAuthorization), CommandStart()), ~IsAuth())
 async def process_authorization_start(message: Message, state: FSMContext):
     await message.answer(text=WELCOME,
                          reply_markup=choose_language_kb())

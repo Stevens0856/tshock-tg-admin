@@ -3,23 +3,31 @@ from typing import Any, Dict, Callable, Awaitable
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject
 
-from models.methods import get_language
+from models.methods import get_userdata
+from models.models import User
 
 
-class UserLanguageMiddleware(BaseMiddleware):
+class UserDataMiddleware(BaseMiddleware):
     async def __call__(
             self,
             handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
             event: TelegramObject,
             data: Dict[str, Any],
     ) -> Any:
+
+        data["language"]: str = 'en'
+        data["user_data"]: User | None = None
+
         try:
             user_id: int = data['event_from_user'].id
         except KeyError:
-            data["language"]: str = 'en'
             return await handler(event, data)
 
-        language: str | None = await get_language(data["session"], user_id)
-        data["language"]: str = language if language else 'en'
+        user_data: User | None = await get_userdata(data["session"], user_id)
+        if not user_data:
+            return await handler(event, data)
+
+        data["user_data"] = user_data
+        data["language"] = user_data.lang
 
         return await handler(event, data)

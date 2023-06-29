@@ -13,8 +13,8 @@ from lexicon.server_section.message_texts import WAITING_BROADCAST_INPUT, SERVER
 from states.states import FSMServerSection
 
 router: Router = Router()
-router.message.filter(IsAuth(), StateFilter(FSMServerSection))
-router.callback_query.filter(IsAuth(), StateFilter(FSMServerSection))
+router.message.filter(StateFilter(FSMServerSection), IsAuth())
+router.callback_query.filter(StateFilter(FSMServerSection), IsAuth())
 
 log: logging.Logger = logging.getLogger('server_section')
 

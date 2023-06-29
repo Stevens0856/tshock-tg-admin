@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 
 from keyboards.default_menu import set_default_menu
 from middlewares.db import DbSessionMiddleware
-from middlewares.language import UserLanguageMiddleware
+from middlewares.user_data import UserDataMiddleware
 from models.methods import create_tables
 
 logging.basicConfig(
@@ -39,9 +39,8 @@ dp.message.filter(F.chat.type == "private")
 # This middleware fires before filters
 dp.message.outer_middleware(DbSessionMiddleware(db_pool))
 dp.callback_query.outer_middleware(DbSessionMiddleware(db_pool))
-# This middleware fires after filters
-dp.message.middleware(UserLanguageMiddleware())
-dp.callback_query.middleware(UserLanguageMiddleware())
+dp.message.outer_middleware(UserDataMiddleware())
+dp.callback_query.outer_middleware(UserDataMiddleware())
 
 # Register routers
 dp.include_router(default_commands.router)

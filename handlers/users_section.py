@@ -13,8 +13,8 @@ from lexicon.users_section.message_texts import USERS_SECTION_MENU_TEXT
 from states.states import FSMUsersSection
 
 router: Router = Router()
-router.message.filter(IsAuth(), StateFilter(FSMUsersSection))
-router.callback_query.filter(IsAuth(), StateFilter(FSMUsersSection))
+router.message.filter(StateFilter(FSMUsersSection), IsAuth())
+router.callback_query.filter(StateFilter(FSMUsersSection), IsAuth())
 
 log: logging.Logger = logging.getLogger('users_section')
 

@@ -12,12 +12,13 @@ from lexicon.auth.message_texts import WELCOME
 from lexicon.default.message_texts import MAIN_MENU_TEXT
 from lexicon.tokens_section.message_texts import LOGOUT_CONFIRMATION_TEXT, TOKENS_SECTION_MENU_TEXT, \
     SUCCESSFUL_LOGOUT_TEXT, GET_TOKEN_TEXT
-from models.methods import delete_user, get_token
+from models.methods import delete_user
+from models.models import User
 from states.states import FSMTokensSection, FSMAuthorization
 
 router: Router = Router()
-router.message.filter(IsAuth(), StateFilter(FSMTokensSection))
-router.callback_query.filter(IsAuth(), StateFilter(FSMTokensSection))
+router.message.filter(StateFilter(FSMTokensSection), IsAuth())
+router.callback_query.filter(StateFilter(FSMTokensSection), IsAuth())
 
 log: logging.Logger = logging.getLogger('tokens_section')
 
@@ -56,8 +57,8 @@ async def process_logout_confirm(callback: CallbackQuery, state: FSMContext, lan
 
 
 @router.callback_query(StateFilter(FSMTokensSection.menu), Text(text='get_token'))
-async def process_get_token(callback: CallbackQuery, language: str, session: AsyncSession):
-    user_token = await get_token(session, callback.from_user.id)
+async def process_get_token(callback: CallbackQuery, language: str, user_data: User):
+    user_token: str = user_data.api_token
     await callback.message.delete()
     await callback.message.answer(text=GET_TOKEN_TEXT[language]+'<span class="tg-spoiler">'+user_token+'</span>',
                                   reply_markup=tokens_section_menu_kb(language))

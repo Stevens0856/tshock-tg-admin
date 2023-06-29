@@ -14,7 +14,7 @@ from lexicon.users_section.message_texts import USERS_SECTION_MENU_TEXT
 from states.states import FSMServerSection, FSMUsersSection, FSMTokensSection
 
 router: Router = Router()
-router.callback_query.filter(IsAuth(), StateFilter(default_state))
+router.callback_query.filter(StateFilter(default_state), IsAuth())
 
 log: logging.Logger = logging.getLogger('main_menu')
 
