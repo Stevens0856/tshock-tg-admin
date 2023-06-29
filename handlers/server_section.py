@@ -7,11 +7,12 @@ from aiogram.types import CallbackQuery, Message
 
 from filters.auth import IsAuth
 from keyboards.keyboards import main_menu_kb, server_section_menu_kb, cancel_kb
-from lexicon.default.message_texts import MAIN_MENU_TEXT
+from lexicon.default.message_texts import MAIN_MENU_TEXT, ERROR
 from lexicon.server_section.message_texts import WAITING_BROADCAST_INPUT, SERVER_SECTION_MENU_TEXT, \
     WAITING_RAW_CMD_INPUT
 from models.models import User
 from services.api_requests import v2_server_status, world_read, v3_server_rawcmd, v2_server_broadcast
+from services.services import convert_server_status_response_to_message
 from states.states import FSMServerSection
 
 router: Router = Router()
@@ -30,10 +31,16 @@ async def process_back_to_main_menu(callback: CallbackQuery, state: FSMContext, 
 
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='server_status'))
 async def process_server_status(callback: CallbackQuery, language: str, user_data: User):
-    server_status_result = await v2_server_status(user_data.api_token, rules=True)
-    log.info(f"process_server_status | Message [TEXT: {server_status_result}] from user [ID: {callback.from_user.id}]")
+    server_status_result = await v2_server_status(user_data.api_token)
     await callback.message.delete()
-    await callback.message.answer(text='Server status info...', reply_markup=server_section_menu_kb(language))
+    if server_status_result['status'] == '200':
+        await callback.message.answer(text=convert_server_status_response_to_message(server_status_result, language),
+                                      reply_markup=server_section_menu_kb(language))
+    else:
+        await callback.message.answer(text=ERROR[language],
+                                      reply_markup=server_section_menu_kb(language))
+
+    log.info(f"process_server_status | Message [TEXT: {server_status_result}] from user [ID: {callback.from_user.id}]")
 
 
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='world_read'))
