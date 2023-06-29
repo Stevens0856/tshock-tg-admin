@@ -12,7 +12,7 @@ from lexicon.server_section.message_texts import WAITING_BROADCAST_INPUT, SERVER
     WAITING_RAW_CMD_INPUT
 from models.models import User
 from services.api_requests import v2_server_status, world_read, v3_server_rawcmd, v2_server_broadcast
-from services.services import convert_server_status_response_to_message
+from services.services import convert_server_status_response_to_message, convert_world_read_response_to_message
 from states.states import FSMServerSection
 
 router: Router = Router()
@@ -46,9 +46,15 @@ async def process_server_status(callback: CallbackQuery, language: str, user_dat
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='world_read'))
 async def process_world_read(callback: CallbackQuery, language: str, user_data: User):
     world_read_result = await world_read(user_data.api_token)
-    log.info(f"process_world_read | Message [TEXT: {world_read_result}] from user [ID: {callback.from_user.id}]")
     await callback.message.delete()
-    await callback.message.answer(text='World Information...', reply_markup=server_section_menu_kb(language))
+    if world_read_result['status'] == '200':
+        await callback.message.answer(text=convert_world_read_response_to_message(world_read_result, language),
+                                      reply_markup=server_section_menu_kb(language))
+    else:
+        await callback.message.answer(text=ERROR[language],
+                                      reply_markup=server_section_menu_kb(language))
+
+    log.info(f"process_world_read | Message [TEXT: {world_read_result}] from user [ID: {callback.from_user.id}]")
 
 
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='broadcast'))

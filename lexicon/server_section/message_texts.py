@@ -22,16 +22,31 @@ SERVER_STATUS: dict[str, str] = {
           'Максимальная вместимость игроков: {maxplayers}\n'
           'Мир: {world}\n'
           'Аптайм: {uptime}\n'
-          'Пароль сервера: {serverpassword}\n',
+          'Пароль сервера: {serverpassword}',
     'en': 'Server name: {name}\n'
-          'Server version: {serverversion}\n'
-          'TShock version: {tshockversion}\n'
+          'Server version: <code>{serverversion}</code>\n'
+          'TShock version: <code>{tshockversion}</code>\n'
           'Port: {port}\n'
           'Number of players online: {playercount}\n'
           'Maximum players capacity: {maxplayers}\n'
           'World: {world}\n'
           'Uptime: {uptime}\n'
-          'Server password: {serverpassword}\n'
+          'Server password: {serverpassword}'
+}
+
+WORLD_READ: dict[str, str] = {
+    'ru': 'Имя: {name}\n'
+          'Размер: {size}\n'
+          'Время: {time}\n'
+          'Время суток: {time_of_day}\n'
+          'Кровавая луна: {bloodmoon}\n'
+          'Размер вторжения: {invasionsize}',
+    'en': 'Name: {name}\n'
+          'Size: {size}\n'
+          'Time: {time}\n'
+          'Time of day: {time_of_day}\n'
+          'Bloodmoon: {bloodmoon}\n'
+          'Invasion size: {invasionsize}'
 }
 
 SERVER_PASSWORD_FALSE: dict[str, str] = {
@@ -39,17 +54,13 @@ SERVER_PASSWORD_FALSE: dict[str, str] = {
     'en': 'Not set'
 }
 
-UPTIME: dict[str, dict[str, str]] = {
+TIME_OF_DAY: dict[str, dict[str, str]] = {
     'ru': {
-        'd': 'д',
-        'h': 'ч',
-        'm': 'м',
-        's': 'с'
+        'day': 'День',
+        'night': 'Ночь'
     },
     'en': {
-        'd': 'd',
-        'h': 'h',
-        'm': 'm',
-        's': 's'
+        'day': 'Day',
+        'night': 'Night'
     }
 }
