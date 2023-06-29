@@ -14,7 +14,8 @@ router: Router = Router()
 router.message.filter(~StateFilter(FSMAuthorization.input_api_token,
                                    FSMAuthorization.input_login,
                                    FSMAuthorization.input_password,
-                                   FSMServerSection.broadcast))
+                                   FSMServerSection.broadcast,
+                                   FSMServerSection.raw_cmd))
 
 
 @router.message(or_f(CommandStart(), Command(commands='menu')), IsAuth())
