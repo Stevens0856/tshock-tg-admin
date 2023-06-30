@@ -64,3 +64,13 @@ TIME_OF_DAY: dict[str, dict[str, str]] = {
         'night': 'Night'
     }
 }
+
+BROADCAST_200: dict[str, str] = {
+    'ru': 'Сообщение успешно передано.',
+    'en': 'The message was broadcasted successfully.'
+}
+
+RAW_CMD_200: dict[str, str] = {
+    'ru': 'Результат:\n',
+    'en': 'Result:\n'
+}

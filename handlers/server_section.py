@@ -7,12 +7,13 @@ from aiogram.types import CallbackQuery, Message
 
 from filters.auth import IsAuth
 from keyboards.keyboards import main_menu_kb, server_section_menu_kb, cancel_kb
-from lexicon.default.message_texts import MAIN_MENU_TEXT, ERROR
+from lexicon.default.message_texts import MAIN_MENU_TEXT, ERROR, NOT_AUTHORIZED_403
 from lexicon.server_section.message_texts import WAITING_BROADCAST_INPUT, SERVER_SECTION_MENU_TEXT, \
-    WAITING_RAW_CMD_INPUT
+    WAITING_RAW_CMD_INPUT, BROADCAST_200
 from models.models import User
 from services.api_requests import v2_server_status, world_read, v3_server_rawcmd, v2_server_broadcast
-from services.services import convert_server_status_response_to_message, convert_world_read_response_to_message
+from services.services import convert_server_status_response_to_message, convert_world_read_response_to_message, \
+    convert_raw_cmd_response_to_message
 from states.states import FSMServerSection
 
 router: Router = Router()
@@ -68,11 +69,18 @@ async def process_broadcast_start(callback: CallbackQuery, state: FSMContext, la
 @router.message(StateFilter(FSMServerSection.broadcast))
 async def process_broadcast_input(message: Message, state: FSMContext, language: str, user_data: User):
     broadcast_result = await v2_server_broadcast(user_data.api_token, message.text)
-    log.info(f"process_broadcast_input | Message [TEXT: {broadcast_result}] from user [ID: {message.from_user.id}]")
-    await message.answer(text='Message sent to server...',
-                         reply_markup=server_section_menu_kb(language))
+
+    if broadcast_result['status'] == '200':
+        await message.answer(text=BROADCAST_200[language],
+                             reply_markup=server_section_menu_kb(language))
+    elif broadcast_result['status'] == '403':
+        await message.answer(text=NOT_AUTHORIZED_403[language],
+                             reply_markup=server_section_menu_kb(language))
+    else:
+        await message.answer(text=ERROR[language], reply_markup=server_section_menu_kb(language))
 
     await state.set_state(FSMServerSection.menu)
+    log.info(f"process_broadcast_input | Message [TEXT: {broadcast_result}] from user [ID: {message.from_user.id}]")
 
 
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='raw_cmd'))
@@ -86,11 +94,18 @@ async def process_raw_cmd_start(callback: CallbackQuery, state: FSMContext, lang
 @router.message(StateFilter(FSMServerSection.raw_cmd))
 async def process_raw_cmd_input(message: Message, state: FSMContext, language: str, user_data: User):
     raw_cmd_result = await v3_server_rawcmd(user_data.api_token, message.text)
-    log.info(f"process_raw_cmd_input | Message [TEXT: {raw_cmd_result}] from user [ID: {message.from_user.id}]")
-    await message.answer(text='Command completed...',
-                         reply_markup=server_section_menu_kb(language))
+
+    if raw_cmd_result['status'] == '200':
+        await message.answer(text=convert_raw_cmd_response_to_message(raw_cmd_result['response'], language),
+                             reply_markup=server_section_menu_kb(language))
+    elif raw_cmd_result['status'] == '403':
+        await message.answer(text=NOT_AUTHORIZED_403[language],
+                             reply_markup=server_section_menu_kb(language))
+    else:
+        await message.answer(text=ERROR[language], reply_markup=server_section_menu_kb(language))
 
     await state.set_state(FSMServerSection.menu)
+    log.info(f"process_raw_cmd_input | Message [TEXT: {raw_cmd_result}] from user [ID: {message.from_user.id}]")
 
 
 @router.callback_query(or_f(StateFilter(FSMServerSection.broadcast),

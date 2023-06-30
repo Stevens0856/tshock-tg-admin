@@ -1,5 +1,6 @@
 from lexicon.default.message_texts import TIME, ACTIVITY_STATUS
-from lexicon.server_section.message_texts import SERVER_STATUS, SERVER_PASSWORD_FALSE, TIME_OF_DAY, WORLD_READ
+from lexicon.server_section.message_texts import SERVER_STATUS, SERVER_PASSWORD_FALSE, TIME_OF_DAY, WORLD_READ, \
+    RAW_CMD_200
 
 
 def convert_uptime_to_humanreadable(uptime: str, lang: str) -> str:
@@ -63,4 +64,12 @@ def convert_world_read_response_to_message(response: dict, lang: str) -> str:
                                            time_of_day=time_of_day,
                                            bloodmoon=bloodmoon,
                                            invasionsize=response['invasionsize'])
+    return message
+
+
+def convert_raw_cmd_response_to_message(response: dict, lang: str) -> str:
+    message: str = RAW_CMD_200[lang]
+    for line in response:
+        message += line + '\n'
+
     return message
