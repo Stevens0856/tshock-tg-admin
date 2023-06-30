@@ -1,6 +1,10 @@
+import logging
+
 from lexicon.default.message_texts import TIME, ACTIVITY_STATUS
 from lexicon.server_section.message_texts import SERVER_STATUS, SERVER_PASSWORD_FALSE, TIME_OF_DAY, WORLD_READ, \
     RAW_CMD_200
+
+log: logging.Logger = logging.getLogger('services')
 
 
 def convert_uptime_to_humanreadable(uptime: str, lang: str) -> str:
@@ -23,17 +27,11 @@ def convert_uptime_to_humanreadable(uptime: str, lang: str) -> str:
     return result
 
 
-def convert_time(time_in_seconds: float, lang: str) -> str:
-    int_time_in_seconds: int = int(time_in_seconds)
-    shifted_time: int = int_time_in_seconds + 4 * 3600 + 30 * 60
-
-    total_minutes: int = int(shifted_time / 60)
-    hours: int = total_minutes // 60
-    minutes: int = total_minutes % 60
-    seconds: int = int_time_in_seconds % 60
-
-    if hours >= 24:
-        hours -= 24
+def convert_time(response_time: float, lang: str) -> str:
+    seconds = int(response_time)
+    hours = seconds // 3600
+    minutes = (seconds // 60) % 60
+    seconds = seconds % 60
 
     time_string: str = f'{hours}{TIME[lang]["h"]}{minutes}{TIME[lang]["m"]}{seconds}{TIME[lang]["s"]}'
     return time_string
@@ -73,3 +71,16 @@ def convert_raw_cmd_response_to_message(response: dict, lang: str) -> str:
         message += line + '\n'
 
     return message
+
+
+def parse_active_users(active_users_response: str) -> list:
+    nicknames = active_users_response.split('\t')
+    active_users = [nickname for nickname in nicknames if nickname]
+    return active_users
+
+
+def create_active_users_page_data(active_users: list, current_page: int, page_size: int = 5) -> list:
+    start: int = (current_page - 1) * page_size
+    end: int = start + page_size
+
+    return active_users[start:min(end, len(active_users))]

@@ -14,21 +14,21 @@ WAITING_RAW_CMD_INPUT: dict[str, str] = {
 }
 
 SERVER_STATUS: dict[str, str] = {
-    'ru': 'Имя сервера: {name}\n'
-          'Версия сервера: <code>{serverversion}</code>\n'
+    'ru': 'Имя: {name}\n'
+          'Версия игры: <code>{serverversion}</code>\n'
           'Версия TShock: <code>{tshockversion}</code>\n'
           'Порт: {port}\n'
-          'Количество игроков онлайн: {playercount}\n'
-          'Максимальная вместимость игроков: {maxplayers}\n'
+          'Онлайн: {playercount}\n'
+          'Вместимость: {maxplayers}\n'
           'Мир: {world}\n'
           'Аптайм: {uptime}\n'
           'Пароль сервера: {serverpassword}',
-    'en': 'Server name: {name}\n'
-          'Server version: <code>{serverversion}</code>\n'
+    'en': 'Name: {name}\n'
+          'Game version: <code>{serverversion}</code>\n'
           'TShock version: <code>{tshockversion}</code>\n'
           'Port: {port}\n'
-          'Number of players online: {playercount}\n'
-          'Maximum players capacity: {maxplayers}\n'
+          'Online: {playercount}\n'
+          'Capacity: {maxplayers}\n'
           'World: {world}\n'
           'Uptime: {uptime}\n'
           'Server password: {serverpassword}'
@@ -37,31 +37,31 @@ SERVER_STATUS: dict[str, str] = {
 WORLD_READ: dict[str, str] = {
     'ru': 'Имя: {name}\n'
           'Размер: {size}\n'
-          'Время: {time}\n'
           'Время суток: {time_of_day}\n'
+          'Время суток длится уже: {time}\n'
           'Кровавая луна: {bloodmoon}\n'
           'Размер вторжения: {invasionsize}',
     'en': 'Name: {name}\n'
           'Size: {size}\n'
-          'Time: {time}\n'
           'Time of day: {time_of_day}\n'
+          'Time of day lasts already: {time}\n'
           'Bloodmoon: {bloodmoon}\n'
           'Invasion size: {invasionsize}'
 }
 
 SERVER_PASSWORD_FALSE: dict[str, str] = {
-    'ru': 'Не установлен',
-    'en': 'Not set'
+    'ru': 'не установлен',
+    'en': 'not set'
 }
 
 TIME_OF_DAY: dict[str, dict[str, str]] = {
     'ru': {
-        'day': 'День',
-        'night': 'Ночь'
+        'day': 'день',
+        'night': 'ночь'
     },
     'en': {
-        'day': 'Day',
-        'night': 'Night'
+        'day': 'day',
+        'night': 'night'
     }
 }
 

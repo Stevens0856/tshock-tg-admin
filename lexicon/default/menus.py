@@ -38,3 +38,8 @@ CONFIRMATION_MENU: dict[str, dict[str, str]] = {
         'cancel': '❌ Cancel'
     }
 }
+
+BACK_BUTTON: dict[str, str] = {
+    'ru': '<< Назад',
+    'en': '<< Back'
+}

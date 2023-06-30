@@ -40,3 +40,10 @@ NOT_AUTHORIZED_403: dict[str, str] = {
     'ru': 'У этой учетной записи нет прав для использования указанной конечной точки API.',
     'en': 'This account does not have permission to use the specified API endpoint.'
 }
+
+USER_ICON: str = '👤'
+
+PAGINATION_BUTTONS: dict[str, str] = {
+    'backward': '<<',
+    'forward': '>>'
+}
