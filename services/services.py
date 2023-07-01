@@ -91,3 +91,19 @@ class ActiveUsers:
         end: int = start + self.page_size
 
         return self.user_list[start:min(end, len(self.user_list))]
+
+    def get_target_page(self, action: str, current_page: int) -> int:
+        target_page: int = current_page
+        match action:
+            case 'backward':
+                if current_page > 1:
+                    target_page -= 1
+            case 'forward':
+                if current_page < self.page_count:
+                    target_page += 1
+            case 'start_page':
+                target_page = 1
+            case 'last_page':
+                target_page = self.page_count
+
+        return min(target_page, self.page_count)
