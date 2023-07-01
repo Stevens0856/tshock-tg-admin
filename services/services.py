@@ -1,4 +1,5 @@
 import logging
+import math
 
 from lexicon.default.message_texts import TIME, ACTIVITY_STATUS
 from lexicon.server_section.message_texts import SERVER_STATUS, SERVER_PASSWORD_FALSE, TIME_OF_DAY, WORLD_READ, \
@@ -73,14 +74,20 @@ def convert_raw_cmd_response_to_message(response: dict, lang: str) -> str:
     return message
 
 
-def parse_active_users(active_users_response: str) -> list:
-    nicknames = active_users_response.split('\t')
-    active_users = [nickname for nickname in nicknames if nickname]
-    return active_users
+class ActiveUsers:
+    def __init__(self, active_users_response: str, page_size: int = 5):
+        self.active_users_response = active_users_response
+        self.page_size = page_size
+        self.user_list, self.page_count = self._parse_active_users()
 
+    def _parse_active_users(self) -> tuple[list[str], int]:
+        nicknames = self.active_users_response.split('\t')
+        active_users = [nickname for nickname in nicknames if nickname]
+        page_count: int = math.ceil(len(active_users) / self.page_size)
+        return active_users, page_count
 
-def create_active_users_page_data(active_users: list, current_page: int, page_size: int = 5) -> list:
-    start: int = (current_page - 1) * page_size
-    end: int = start + page_size
+    def get_page_data(self, current_page: int) -> list:
+        start: int = (current_page - 1) * self.page_size
+        end: int = start + self.page_size
 
-    return active_users[start:min(end, len(active_users))]
+        return self.user_list[start:min(end, len(self.user_list))]
