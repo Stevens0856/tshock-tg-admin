@@ -5,7 +5,7 @@ from aiogram.filters import StateFilter, Text, or_f
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 
-from callback_factories.callback_factories import PaginationCallbackFactory
+from callback_factories.callback_factories import PaginationCallbackFactory, ActiveUsersCallbackFactory
 from filters.auth import IsAuth
 from keyboards.keyboard_utils import create_inline_kb, create_active_users_kb
 from keyboards.keyboards import main_menu_kb, users_section_menu_kb
@@ -35,15 +35,15 @@ async def process_active_users(callback: CallbackQuery, state: FSMContext, user_
     active_users_result = await v2_users_activelist(user_data.api_token)
     await callback.message.delete()
     if active_users_result['status'] == '200':
-        if not active_users_result['activeusers']:
-            await callback.message.answer(text=NO_ACTIVE_USERS[language],
-                                          reply_markup=users_section_menu_kb(language))
-        else:
+        if active_users_result['activeusers']:
             active_users: ActiveUsers = ActiveUsers(active_users_result['activeusers'])
             await callback.message.answer(text=ACTIVE_USERS_OPENING_TEXT[language],
                                           reply_markup=create_active_users_kb(active_users, language))
             await state.update_data(current_page=1)
             await state.set_state(FSMUsersSection.active_users)
+        else:
+            await callback.message.answer(text=NO_ACTIVE_USERS[language],
+                                          reply_markup=users_section_menu_kb(language))
     elif active_users_result['status'] == '403':
         await callback.message.answer(text=NOT_AUTHORIZED_403[language],
                                       reply_markup=users_section_menu_kb(language))
@@ -80,6 +80,11 @@ async def process_active_users_page_switching(callback: CallbackQuery, callback_
         await callback.message.answer(text=ERROR[language], reply_markup=users_section_menu_kb(language))
 
     await state.set_state(FSMUsersSection.menu)
+
+
+@router.callback_query(StateFilter(FSMUsersSection.active_users), ActiveUsersCallbackFactory.filter())
+async def process_active_user_click(callback: CallbackQuery):
+    await callback.answer()
 
 
 @router.callback_query(StateFilter(FSMUsersSection.menu), Text(text='all_users'))

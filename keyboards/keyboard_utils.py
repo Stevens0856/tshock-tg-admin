@@ -3,7 +3,7 @@ import logging
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from callback_factories.callback_factories import PaginationCallbackFactory
+from callback_factories.callback_factories import PaginationCallbackFactory, ActiveUsersCallbackFactory
 from lexicon.default.menus import BACK_BUTTON
 from lexicon.default.message_texts import USER_ICON, PAGINATION_BUTTONS
 from services.services import ActiveUsers
@@ -42,7 +42,7 @@ def create_active_users_kb(active_users: ActiveUsers, language: str, current_pag
     for user in active_users_page_data:
         buttons_with_users.append(InlineKeyboardButton(
             text=USER_ICON + ' ' + user,
-            callback_data=user))
+            callback_data=ActiveUsersCallbackFactory(username=user).pack()))
 
     kb_builder.row(*buttons_with_users, width=1)
 
