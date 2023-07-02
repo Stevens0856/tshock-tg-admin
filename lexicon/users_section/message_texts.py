@@ -17,3 +17,8 @@ ACTIVE_USERS_OPENING_TEXT: dict[str, str] = {
     'ru': 'Сейчас онлайн:',
     'en': 'Now online:'
 }
+
+ALL_USERS_OPENING_TEXT: dict[str, str] = {
+    'ru': 'Зарегистрированные пользователи:',
+    'en': 'Registered users:'
+}

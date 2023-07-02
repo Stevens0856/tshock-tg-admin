@@ -10,3 +10,16 @@ USERS_SECTION_MENU: dict[str, dict[str, str]] = {
         'back': '<< Back'
     }
 }
+
+ALL_USERS_HEADER: dict[str, dict[str, str]] = {
+    'ru': {
+        'id': 'ID',
+        'username': 'Пользователь',
+        'group': 'Группа'
+    },
+    'en': {
+        'id': 'ID',
+        'username': 'User',
+        'group': 'Group'
+    }
+}
