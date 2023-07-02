@@ -1,4 +1,4 @@
-WELCOME: str = 'Добро пожаловать! / Welcome!\n' \
+WELCOME: str = '👋 Добро пожаловать! / Welcome!\n' \
                'Выберите язык. / Choose language.'
 
 LANG_SELECTED_IN_AUTH: dict[str, str] = {
@@ -9,11 +9,11 @@ LANG_SELECTED_IN_AUTH: dict[str, str] = {
 }
 
 WAITING_TOKEN_INPUT: dict[str, str] = {
-    'ru': 'Пожалуйста, отправьте токен или создайте новый.',
-    'en': 'Please submit a token or create a new one.'
+    'ru': '⌨️ Пожалуйста, отправьте токен или создайте новый.',
+    'en': '⌨️ Please submit a token or create a new one.'
 }
 
-WARNING_CHOOSE_LANG: str = 'Чтобы продолжить, необходимо выбрать язык. / To continue, you must select a language.'
+WARNING_CHOOSE_LANG: str = '🌐 Чтобы продолжить, необходимо выбрать язык. / To continue, you must select a language.'
 
 TOKEN_INPUT_403: dict[str, str] = {
     'ru': '❗️Предоставленный токен недействителен.',
@@ -26,13 +26,13 @@ TOKEN_INPUT_200: dict[str, str] = {
 }
 
 INPUT_LOGIN_TEXT: dict[str, str] = {
-    'ru': 'Введите имя вашего персонажа на сервере.',
-    'en': 'Enter the name of your character on the server.'
+    'ru': '⌨️ Введите имя вашего персонажа на сервере.',
+    'en': '⌨️ Enter the name of your character on the server.'
 }
 
 INPUT_PASSWORD_TEXT: dict[str, str] = {
-    'ru': 'Введите пароль, который используется для входа в игру этим персонажем.',
-    'en': 'Enter the password that is used to enter the game by this character.'
+    'ru': '⌨️ Введите пароль, который используется для входа в игру этим персонажем.',
+    'en': '⌨️ Enter the password that is used to enter the game by this character.'
 }
 
 TOKEN_CREATE_403: dict[str, str] = {

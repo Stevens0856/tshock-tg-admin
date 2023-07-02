@@ -18,13 +18,13 @@ CANCEL_MENU: dict[str, dict[str, str]] = {
 MAIN_MENU: dict[str, dict[str, str]] = {
     'ru': {
         'server': '⚙️ Сервер',
-        'users': '👨‍🦰 Пользователи',
-        'tokens': '🗝 Токены',
+        'users': '👥 Пользователи',
+        'tokens': '🔑 Токены',
     },
     'en': {
         'server': '⚙️ Server',
-        'users': '👨‍🦰 Users',
-        'tokens': '🗝 Tokens',
+        'users': '👥 Users',
+        'tokens': '🔑 Tokens',
     }
 }
 

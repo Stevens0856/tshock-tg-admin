@@ -24,10 +24,8 @@ class UserDataMiddleware(BaseMiddleware):
             return await handler(event, data)
 
         user_data: User | None = await get_userdata(data["session"], user_id)
-        if not user_data:
-            return await handler(event, data)
-
-        data["user_data"] = user_data
-        data["language"] = user_data.lang
+        if user_data:
+            data["user_data"] = user_data
+            data["language"] = user_data.lang
 
         return await handler(event, data)

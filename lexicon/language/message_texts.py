@@ -1,6 +1,6 @@
 WAITING_LANGUAGE_RESELECTION_TEXT: dict[str, str] = {
-    'ru': 'Выберите язык из списка.',
-    'en': 'Select a language from the list.'
+    'ru': '🌐 Выберите язык из списка.',
+    'en': '🌐 Select a language from the list.'
 }
 
 LANG_RESELECTED: dict[str, str] = {

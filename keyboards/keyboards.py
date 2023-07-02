@@ -24,11 +24,11 @@ def main_menu_kb(lang):
 
 
 def server_section_menu_kb(lang):
-    return create_inline_kb(1, SERVER_SECTION_MENU[lang])
+    return create_inline_kb(2, SERVER_SECTION_MENU[lang])
 
 
 def users_section_menu_kb(lang):
-    return create_inline_kb(1, USERS_SECTION_MENU[lang])
+    return create_inline_kb(2, USERS_SECTION_MENU[lang])
 
 
 def tokens_section_menu_kb(lang):

@@ -1,16 +1,16 @@
 SERVER_SECTION_MENU: dict[str, dict[str, str]] = {
     'ru': {
-        'server_status': 'Статус сервера',
-        'world_read': 'Информация о мире',
-        'broadcast': 'Рассылка сообщения на весь сервер',
-        'raw_cmd':  'Выполнить необработанную команду на сервере',
+        'server_status': '🔋 Статус сервера',
+        'world_read': '🌎 Информация о мире',
+        'broadcast': '📢 Трансляция сообщения',
+        'raw_cmd':  '🛠 Выполнить команду',
         'back': '<< Назад'
     },
     'en': {
-        'server_status': 'Server status',
-        'world_read': 'World Information',
-        'broadcast': 'Sending a message to the entire server',
-        'raw_cmd':  'Execute a raw command on the server',
+        'server_status': '🔋 Server status',
+        'world_read': '🌎 World information',
+        'broadcast': '📢 Broadcast message',
+        'raw_cmd':  '🛠 Run command',
         'back': '<< Back'
     }
 }

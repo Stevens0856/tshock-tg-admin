@@ -5,7 +5,7 @@ from aiogram.types import Message
 
 from filters.auth import IsAuth
 from keyboards.keyboards import main_menu_kb, choose_language_kb
-from lexicon.default.message_texts import MAIN_MENU_TEXT
+from lexicon.default.message_texts import MAIN_MENU_TEXT, HELP_TEXT
 from lexicon.language.message_texts import WAITING_LANGUAGE_RESELECTION_TEXT
 from states.states import FSMAuthorization, FSMServerSection, FSMLanguageReselection
 
@@ -32,5 +32,5 @@ async def process_start_command(message: Message, state: FSMContext, language: s
 
 
 @router.message(Command(commands='help'))
-async def process_start_command(message: Message):
-    await message.answer(text='Help with the bot.')
+async def process_start_command(message: Message, language: str):
+    await message.answer(text=HELP_TEXT[language])
