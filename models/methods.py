@@ -36,11 +36,10 @@ async def merge_user(session: AsyncSession, telegram_id: int, name_in_game: str,
         await session.commit()
 
 
-async def update_lang(session: AsyncSession, telegram_id: int, lang: str) -> None:
-    user: User | None = await get_userdata(session, telegram_id)
-    if user:
-        user.lang = lang
+async def update_lang(session: AsyncSession, user_data: User, lang: str) -> None:
+    if user_data:
+        user_data.lang = lang
         await session.commit()
     else:
         # Handle the case when the user doesn't exist
-        raise ValueError(f"User with telegram_id {telegram_id} does not exist.")
+        raise ValueError(f"User does not exist.")
