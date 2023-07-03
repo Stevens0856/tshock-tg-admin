@@ -41,8 +41,6 @@ async def process_server_status(callback: CallbackQuery, language: str, user_dat
         await callback.message.answer(text=ERROR[language],
                                       reply_markup=server_section_menu_kb(language))
 
-    log.info(f"process_server_status | Message [TEXT: {server_status_result}] from user [ID: {callback.from_user.id}]")
-
 
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='world_read'))
 async def process_world_read(callback: CallbackQuery, language: str, user_data: User):
@@ -54,8 +52,6 @@ async def process_world_read(callback: CallbackQuery, language: str, user_data: 
     else:
         await callback.message.answer(text=ERROR[language],
                                       reply_markup=server_section_menu_kb(language))
-
-    log.info(f"process_world_read | Message [TEXT: {world_read_result}] from user [ID: {callback.from_user.id}]")
 
 
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='broadcast'))
@@ -80,7 +76,6 @@ async def process_broadcast_input(message: Message, state: FSMContext, language:
         await message.answer(text=ERROR[language], reply_markup=server_section_menu_kb(language))
 
     await state.set_state(FSMServerSection.menu)
-    log.info(f"process_broadcast_input | Message [TEXT: {broadcast_result}] from user [ID: {message.from_user.id}]")
 
 
 @router.callback_query(StateFilter(FSMServerSection.menu), Text(text='raw_cmd'))
@@ -105,7 +100,6 @@ async def process_raw_cmd_input(message: Message, state: FSMContext, language: s
         await message.answer(text=ERROR[language], reply_markup=server_section_menu_kb(language))
 
     await state.set_state(FSMServerSection.menu)
-    log.info(f"process_raw_cmd_input | Message [TEXT: {raw_cmd_result}] from user [ID: {message.from_user.id}]")
 
 
 @router.callback_query(or_f(StateFilter(FSMServerSection.broadcast),

@@ -88,7 +88,6 @@ class UsersKeyboardCreator:
         self.kb_builder.row(*header_buttons)
 
         all_users_page_data: list = self.users.get_page_data(self.current_page)
-        log.info(f"all_users | [all_users_page_data: {all_users_page_data}]")
 
         for user in all_users_page_data:
             users_buttons_row: list[InlineKeyboardButton] = [

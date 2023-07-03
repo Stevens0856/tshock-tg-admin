@@ -53,8 +53,6 @@ async def process_active_users(callback: CallbackQuery, state: FSMContext, user_
     else:
         await callback.message.answer(text=ERROR[language], reply_markup=users_section_menu_kb(language))
 
-    log.info(f"process_active_users | Message [TEXT: {active_users_result}] from user [ID: {callback.from_user.id}]")
-
 
 @router.callback_query(StateFilter(FSMUsersSection.active_users), PaginationCallbackFactory.filter())
 async def process_active_users_page_switching(callback: CallbackQuery, callback_data: PaginationCallbackFactory,
@@ -110,8 +108,6 @@ async def process_all_users(callback: CallbackQuery, state: FSMContext, user_dat
                                       reply_markup=users_section_menu_kb(language))
     else:
         await callback.message.answer(text=ERROR[language], reply_markup=users_section_menu_kb(language))
-
-    log.info(f"process_active_users | Message [TEXT: {all_users_result}] from user [ID: {callback.from_user.id}]")
 
 
 @router.callback_query(StateFilter(FSMUsersSection.all_users), PaginationCallbackFactory.filter())

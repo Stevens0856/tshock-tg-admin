@@ -46,7 +46,6 @@ async def process_choose_language(callback: CallbackQuery, state: FSMContext):
 # Handling text messages when choosing a language
 @router.message(StateFilter(FSMAuthorization.select_language))
 async def warning_choose_language(message: Message):
-    log.info(f"warning_choose_language | Message [TEXT: {message.text}] from user [ID: {message.from_user.id}]")
     await message.answer(text=WARNING_CHOOSE_LANG,
                          reply_markup=choose_language_kb())
 
@@ -64,7 +63,6 @@ async def process_back_to_choose_language(callback: CallbackQuery, state: FSMCon
 # Handling token input
 @router.message(StateFilter(FSMAuthorization.input_api_token))
 async def process_token_input(message: Message, state: FSMContext, session: AsyncSession):
-    log.info(f"process_token_input | Message [TEXT: {message.text}] from user [ID: {message.from_user.id}]")
 
     token_test_result: dict = await tokentest(message.text)
     state_data: dict = await state.get_data()
@@ -113,8 +111,6 @@ async def process_create_token_start(callback: CallbackQuery, state: FSMContext)
 # Handling login input
 @router.message(StateFilter(FSMAuthorization.input_login))
 async def process_login_input(message: Message, state: FSMContext):
-    log.info(f"process_login_input | Message [TEXT: {message.text}] from user [ID: {message.from_user.id}]")
-
     state_data: dict = await state.get_data()
 
     await state.update_data(login=message.text)
@@ -127,8 +123,6 @@ async def process_login_input(message: Message, state: FSMContext):
 # Handling password input. Creating a token and binding it
 @router.message(StateFilter(FSMAuthorization.input_password))
 async def process_password_input(message: Message, state: FSMContext, session: AsyncSession):
-    log.info(f"process_password_input | Message [TEXT: {message.text}] from user [ID: {message.from_user.id}]")
-
     await state.update_data(password=message.text)
     state_data: dict = await state.get_data()
 

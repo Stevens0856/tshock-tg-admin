@@ -16,7 +16,7 @@ from middlewares.user_data import UserDataMiddleware
 from models.methods import create_tables
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.WARNING,
     format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
 )
 
@@ -25,7 +25,7 @@ redis: Redis = Redis(host='redis')
 
 storage: RedisStorage = RedisStorage(redis=redis)
 
-engine = create_async_engine(config.postgres_dsn, future=True, echo=True)
+engine = create_async_engine(config.postgres_dsn, future=True, echo=False)
 
 db_pool = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
@@ -57,7 +57,7 @@ dp.include_router(tokens_section.router)
 
 async def main():
     await create_tables(engine)
-    await set_default_menu(bot)  # TODO: rewrite to multilang
+    await set_default_menu(bot)
     await dp.start_polling(bot)
 
 
