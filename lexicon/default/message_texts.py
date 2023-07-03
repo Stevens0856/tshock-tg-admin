@@ -17,10 +17,10 @@ HELP_TEXT: dict[str, str] = {
 }
 
 ERROR: dict[str, str] = {
-    'ru': '❗️Ошибка.\n'
-          'Попробуйте позже.',
-    'en': '❗️Error.\n'
-          'Try later.'
+    'ru': '❗️Ошибка\n'
+          'Попробуйте позже',
+    'en': '❗️Error\n'
+          'Try later'
 }
 
 TIME: dict[str, dict[str, str]] = {
@@ -59,4 +59,14 @@ USER_ICON: str = '👤'
 PAGINATION_BUTTONS: dict[str, str] = {
     'backward': '<<',
     'forward': '>>'
+}
+
+CONNECTION_ERROR: dict[str, str] = {
+    'ru': '❗️ Отсутствует соединение с сервером Terarria.',
+    'en': '❗️ No connection to Terarria server.'
+}
+
+TOKEN_EXPIRED: dict[str, str] = {
+    'ru': '❗️ Токен устарел. Авторизуйтесь под другим токеном.',
+    'en': '❗ Token expired. Log in with a different token.'
 }

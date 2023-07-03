@@ -11,6 +11,7 @@ from sqlalchemy.orm import sessionmaker
 
 from keyboards.default_menu import set_default_menu
 from middlewares.db import DbSessionMiddleware
+from middlewares.token_test import TokenTestMiddleware
 from middlewares.user_data import UserDataMiddleware
 from models.methods import create_tables
 
@@ -41,6 +42,8 @@ dp.message.outer_middleware(DbSessionMiddleware(db_pool))
 dp.callback_query.outer_middleware(DbSessionMiddleware(db_pool))
 dp.message.outer_middleware(UserDataMiddleware())
 dp.callback_query.outer_middleware(UserDataMiddleware())
+dp.message.outer_middleware(TokenTestMiddleware())
+dp.callback_query.outer_middleware(TokenTestMiddleware())
 
 # Register routers
 dp.include_router(default_commands.router)
