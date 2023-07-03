@@ -20,7 +20,7 @@ SERVER_STATUS: dict[str, str] = {
           '🔧 Версия TShock: <code>{tshockversion}</code>\n'
           '⚙️ Порт: {port}\n'
           '🟢 Онлайн: {playercount}\n'
-          '⚡️ Вместимость: {maxplayers}\n'
+          '👫 Вместимость: {maxplayers}\n'
           '🌎 Мир: {world}\n'
           '🕰 Аптайм: {uptime}\n'
           '🔐 Пароль сервера: {serverpassword}',
@@ -30,7 +30,7 @@ SERVER_STATUS: dict[str, str] = {
           '🔧 TShock version: <code>{tshockversion}</code>\n'
           '⚙️ Port: {port}\n'
           '🟢 Online: {playercount}\n'
-          '⚡️ Capacity: {maxplayers}\n'
+          '👫 Capacity: {maxplayers}\n'
           '🌎 World: {world}\n'
           '🕰 Uptime: {uptime}\n'
           '🔐 Server password: {serverpassword}'

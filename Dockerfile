@@ -1,6 +1,6 @@
 FROM python:3.11.4-alpine3.18
 
-ARG BUILD_TYPE
+ARG BUILD_TYPE=production
 
 ENV BUILD_TYPE=${BUILD_TYPE} \
   PYTHONFAULTHANDLER=1 \
@@ -18,7 +18,6 @@ RUN pip install "poetry==$POETRY_VERSION"
 WORKDIR /code
 COPY poetry.lock pyproject.toml /code/
 
-RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
 # Project initialization:
 RUN poetry config virtualenvs.create false \
   && poetry install $(test "$BUILD_TYPE" == production && echo "--no-dev") --no-interaction --no-ansi --no-root
