@@ -18,5 +18,5 @@ Simple Telegram bot that allows you to administer a [TShock](https://github.com/
 5. Run `docker compose up -d`
 
 ## Screenshots
-![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/88cca71d-18ec-4ac1-b5fc-b4a9e4f6ddda)
-![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/301cfc75-6ded-4b7d-b01d-273ba6bf9d73)
+![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/75de3882-cd77-48f9-8c8f-6d760d041cdf)
+![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/1e8a01c1-e58a-4f21-bde3-5191063b7705)
