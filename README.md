@@ -16,3 +16,7 @@ Simple Telegram bot that allows you to administer a [TShock](https://github.com/
 3. Rename `docker-compose.example.yml` to `docker-compose.yml`
 4. Replace `/path/to/postgres-data`, `/path/to/redis-data` with your postgres and redis data paths in `docker-compose.yml`
 5. Run `docker compose up -d`
+
+## Screenshots
+![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/88cca71d-18ec-4ac1-b5fc-b4a9e4f6ddda)
+![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/301cfc75-6ded-4b7d-b01d-273ba6bf9d73)
