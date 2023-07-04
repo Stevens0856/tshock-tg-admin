@@ -19,4 +19,8 @@ Simple Telegram bot that allows you to administer a [TShock](https://github.com/
 
 ## Screenshots
 ![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/75de3882-cd77-48f9-8c8f-6d760d041cdf)
-![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/1e8a01c1-e58a-4f21-bde3-5191063b7705)
+![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/b215e1e9-b390-476d-b17b-376ab858b000)
+
+![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/5287b2fa-8648-47ce-85c0-a07d8e3210e8)
+![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/4291e681-caee-4b58-a85f-6377e8f05c17)
+![image](https://github.com/montaq/tshock-tg-admin/assets/53003167/3148edfb-94a9-4e75-8e55-80c94a1c6aac)
