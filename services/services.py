@@ -76,10 +76,13 @@ def convert_world_read_response_to_message(response: dict, lang: str) -> str:
     return message
 
 
-def convert_raw_cmd_response_to_message(response: dict, lang: str) -> str:
+def convert_raw_cmd_response_to_message(response: list[str], lang: str) -> str:
     message: str = RAW_CMD_200[lang]
     for line in response:
         message += line + '\n'
+
+    # Fix HTML style markup constraint
+    message = message.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
     return message
 

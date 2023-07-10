@@ -91,8 +91,9 @@ async def process_raw_cmd_input(message: Message, state: FSMContext, language: s
     raw_cmd_result = await v3_server_rawcmd(user_data.api_token, message.text)
 
     if raw_cmd_result['status'] == '200':
-        await message.answer(text=convert_raw_cmd_response_to_message(raw_cmd_result['response'], language),
-                             reply_markup=server_section_menu_kb(language))
+        await message.answer(text=convert_raw_cmd_response_to_message(raw_cmd_result['response'], language))
+        await message.answer(text=WAITING_RAW_CMD_INPUT[language], reply_markup=cancel_kb(language))
+        return
     elif raw_cmd_result['status'] == '403':
         await message.answer(text=NOT_AUTHORIZED_403[language],
                              reply_markup=server_section_menu_kb(language))
